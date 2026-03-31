@@ -16,7 +16,7 @@ export const posts: Post[] = [
     date: "March 15, 2026",
     excerpt:
       "Walking through the bamboo groves and centuries-old temples of Kyoto, where every path tells a story of tradition and tranquility.",
-    image: "/images/kyoto.jpg",
+    image: "/images/panda.jpg",
     content: `
 ## Your story goes here
 
