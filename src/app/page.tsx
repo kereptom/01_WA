@@ -1,101 +1,70 @@
-import Image from "next/image";
+import Link from "next/link";
+import { posts } from "@/data/posts";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const featured = posts[0];
+  const recent = posts.slice(1, 4);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="mx-auto max-w-5xl px-6">
+      {/* Hero */}
+      <section className="py-20 text-center">
+        <p className="text-sm uppercase tracking-widest text-[var(--accent)] mb-4">
+          Travel Blog
+        </p>
+        <h1 className="text-5xl font-bold leading-tight mb-6">
+          Stories from around<br />the world
+        </h1>
+        <p className="text-lg text-[var(--muted)] max-w-xl mx-auto">
+          A collection of travel stories, tips, and photography from my
+          adventures across the globe.
+        </p>
+      </section>
+
+      {/* Featured Post */}
+      <section className="mb-20">
+        <Link href={`/blog/${featured.slug}`} className="group block">
+          <div className="aspect-[2/1] rounded-2xl bg-[var(--border)] overflow-hidden mb-6">
+            <div className="w-full h-full bg-gradient-to-br from-amber-100 to-orange-200 group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div className="max-w-2xl">
+            <p className="text-sm text-[var(--accent)] mb-2">{featured.location}</p>
+            <h2 className="text-3xl font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors">
+              {featured.title}
+            </h2>
+            <p className="text-[var(--muted)] leading-relaxed">{featured.excerpt}</p>
+            <p className="text-sm text-[var(--muted)] mt-4">{featured.date}</p>
+          </div>
+        </Link>
+      </section>
+
+      {/* Recent Posts */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-8">Recent Stories</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {recent.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group"
+            >
+              <div className="aspect-[4/3] rounded-xl bg-[var(--border)] overflow-hidden mb-4">
+                <div
+                  className={`w-full h-full ${post.gradient} group-hover:scale-105 transition-transform duration-500`}
+                />
+              </div>
+              <p className="text-sm text-[var(--accent)] mb-1">{post.location}</p>
+              <h3 className="font-semibold mb-2 group-hover:text-[var(--accent)] transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-sm text-[var(--muted)] line-clamp-2">
+                {post.excerpt}
+              </p>
+              <p className="text-xs text-[var(--muted)] mt-3">{post.date}</p>
+            </Link>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
     </div>
   );
 }
