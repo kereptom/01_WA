@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { posts } from "@/data/posts";
 
@@ -28,8 +29,15 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
         &larr; Back to stories
       </Link>
 
-      <div className="aspect-[2/1] rounded-2xl bg-[var(--border)] overflow-hidden mb-8">
-        <div className={`w-full h-full ${post.gradient}`} />
+      <div className="aspect-[2/1] rounded-2xl bg-[var(--border)] overflow-hidden mb-8 relative">
+        <Image
+          src={post.image}
+          alt={post.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 768px"
+          priority
+        />
       </div>
 
       <p className="text-sm text-[var(--accent)] mb-2">{post.location}</p>

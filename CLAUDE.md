@@ -8,6 +8,7 @@
 - After completing any feature or fix, run the tests
 - After tests pass, commit with a descriptive message
 - Push to the current branch on GitHub
+- After each task is completed, commit and push changes
 - If on a feature branch, create a PR when the feature is complete
 
 ## Deploy

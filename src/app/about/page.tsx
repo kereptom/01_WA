@@ -1,10 +1,19 @@
+import Image from "next/image";
+
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="text-4xl font-bold mb-6">About</h1>
 
-      <div className="aspect-[3/1] rounded-2xl bg-[var(--border)] overflow-hidden mb-10">
-        <div className="w-full h-full bg-gradient-to-br from-stone-100 to-amber-100" />
+      <div className="aspect-[3/1] rounded-2xl bg-[var(--border)] overflow-hidden mb-10 relative">
+        <Image
+          src="/images/about-hero.jpg"
+          alt="Travel adventure"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 768px"
+          priority
+        />
       </div>
 
       <div className="space-y-6 text-[var(--muted)] leading-relaxed text-lg">

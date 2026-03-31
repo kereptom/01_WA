@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { posts } from "@/data/posts";
 
 export default function BlogPage() {
@@ -16,9 +17,13 @@ export default function BlogPage() {
             href={`/blog/${post.slug}`}
             className="group"
           >
-            <div className="aspect-[3/2] rounded-xl bg-[var(--border)] overflow-hidden mb-4">
-              <div
-                className={`w-full h-full ${post.gradient} group-hover:scale-105 transition-transform duration-500`}
+            <div className="aspect-[3/2] rounded-xl bg-[var(--border)] overflow-hidden mb-4 relative">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <p className="text-sm text-[var(--accent)] mb-1">{post.location}</p>

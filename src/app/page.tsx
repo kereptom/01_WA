@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { posts } from "@/data/posts";
 
 export default function Home() {
@@ -24,8 +25,15 @@ export default function Home() {
       {/* Featured Post */}
       <section className="mb-20">
         <Link href={`/blog/${featured.slug}`} className="group block">
-          <div className="aspect-[2/1] rounded-2xl bg-[var(--border)] overflow-hidden mb-6">
-            <div className="w-full h-full bg-gradient-to-br from-amber-100 to-orange-200 group-hover:scale-105 transition-transform duration-500" />
+          <div className="aspect-[2/1] rounded-2xl bg-[var(--border)] overflow-hidden mb-6 relative">
+            <Image
+              src={featured.image}
+              alt={featured.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              priority
+            />
           </div>
           <div className="max-w-2xl">
             <p className="text-sm text-[var(--accent)] mb-2">{featured.location}</p>
@@ -48,9 +56,13 @@ export default function Home() {
               href={`/blog/${post.slug}`}
               className="group"
             >
-              <div className="aspect-[4/3] rounded-xl bg-[var(--border)] overflow-hidden mb-4">
-                <div
-                  className={`w-full h-full ${post.gradient} group-hover:scale-105 transition-transform duration-500`}
+              <div className="aspect-[4/3] rounded-xl bg-[var(--border)] overflow-hidden mb-4 relative">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
               <p className="text-sm text-[var(--accent)] mb-1">{post.location}</p>
